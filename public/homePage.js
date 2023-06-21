@@ -7,7 +7,7 @@ logoutButton.action = () => {ApiConnector.logout((response) => {
         location.reload();
         return
     } else {
-        throw "Выход не выполнен!"
+        console.log("Выход не выполнен!"):
     }
   } )
 };
