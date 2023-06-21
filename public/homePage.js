@@ -16,29 +16,18 @@ logoutButton.action = () => {ApiConnector.logout((response) => {
 ApiConnector.current((response) => {
     if(response.success) {
         ProfileWidget.showProfile(response.data);
-        // console.log(response.data);
     }
 })
 
 const ratesBoard = new RatesBoard();
 
-(function() {
+function refreshStockRates () {
     ApiConnector.getStocks((response) => {
         if(response.success) {
             ratesBoard.clearTable();
             ratesBoard.fillTable(response.data)  
-        //   console.log(response.data)
-        }
-    })
-}())
-
-function x () {
-    ApiConnector.getStocks((response) => {
-        if(response.success) {
-            ratesBoard.clearTable();
-            ratesBoard.fillTable(response.data)  
-        //   console.log(response.data)
-        } else { console.log(' не приходит курс валют !!!')}
+        } else { 
+            console.log(' не приходит курс валют !!!')}
     })
 };
 
@@ -74,8 +63,6 @@ moneyManager.sendMoneyCallback = (data) => {
         if(response.success){
             ProfileWidget.showProfile(response.data);
             moneyManager.setMessage(response.success, "Перевод выполнен успешно" );
-            // console.log(response);
-            // console.log(data);
         } else {
             moneyManager.setMessage(response.success, response.error);
         }
@@ -90,12 +77,7 @@ ApiConnector.getFavorites(response => {
         favoritesWidget.clearTable();
         favoritesWidget.fillTable(response.data);
         moneyManager.updateUsersList(response.data)
-        // favoritesWidget.setMessage(response.success, "Запрос начальнoго списка избранного выполнен успешно" );
-        // console.log(response);
-        // console.log(data);
     } /*else {*/
-    //     favoritesWidget.setMessage(response.success, response.error);
-    // }
 }
 );
 
