@@ -21,18 +21,18 @@ ApiConnector.current((response) => {
 
 const ratesBoard = new RatesBoard();
 
-function refreshStockRates () {
+function currencyRates (currency) {
     ApiConnector.getStocks((response) => {
         if(response.success) {
-            ratesBoard.clearTable();
-            ratesBoard.fillTable(response.data)  
-        } else { 
-            console.log(' не приходит курс валют !!!')}
-    })
-};
+            currency.clearTable();
+            currency.fillTable(response.data);
+        }
+    });
+}
 
-x();
-setTimeout(x, 60000);
+currencyRates(currency);
+setInterval(currencyRates, 60000, currency);
+
 
 const moneyManager = new MoneyManager();
 
